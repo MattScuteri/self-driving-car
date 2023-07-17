@@ -7,13 +7,13 @@ completed with an Arduino based vehicle, the code for
 which has been included in this repository.
 
 ## Table of Contents
-[Presentation](##Presentation)
+[Presentation](#presentation)
 
-[Project Background](##Project%20Background)
+[Project Background](#project-background)
 
-[Project Approach](##Project%20Apprach)
+[Project Approach](#project-approach)
 
-[User Instructions](##User%20Instructions)
+[User Instructions](#user-instructions)
 
 ## Presentation
 [Final Presentation Video Link](https://www.youtube.com/watch?v=N61lNMnK5ZU)
@@ -37,7 +37,7 @@ The file `edge_detecion.py` houses the algorithms used to detect lanes on the ro
 ![Masked_img](./project_images/masked.png)
 The frame then has Canny Edge Detection algorithms run that scan the frame looking for high concentrations of gradient, which the algorithm determines as edges. In a well cropped and isolated frame, these edges should be the two lanes on the road. 
 ![Canny](./project_images/canny_img.png)
-After detecting edges, a Hough Transformation is performed on the image in order to determine the best fit lines to describe the edges on the screen. 
+After detecting edges, a Hough Transformation is performed on the image in order to extract lines from the image and determine the best fit lines to describe the edges on the screen. 
 ![Hough](./project_images/hough.png)
 The center of the frame is also determined in order to find the proper direction the car should be steering. 
 ![Steer](./project_images/steering.png)
