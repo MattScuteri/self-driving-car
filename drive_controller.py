@@ -11,6 +11,7 @@ from keras.models import load_model
 control_mode = str(sys.argv[1])
 
 cap = 0
+### Begin "Edge Mode" implmentation
 if control_mode == 'edge':
     to_arduino = serial.Serial(port='/dev/cu.usbserial-AB0P8TBC', baudrate=9600)
 
@@ -43,10 +44,11 @@ if control_mode == 'edge':
                                             (255, 255, 255), 2, cv2.LINE_AA)
 
             cv2.imshow('frame', process_with_rpms)
-
-            # path = '/Users/matt.scuteri/Desktop/GCU/CST-590/self-driving-dnn/training_data'
+            ### Uncomment the below 3 lines to record new training data ###
+            # path = '{{INSERT ABSOLUTE PATH HERE}}self-driving-car/training_data'
             # cv2.imwrite(os.path.join(path, 'frame' + str(cap) + str(direction) + '.jpg'), frame)
             # cap += 1
+            ###############################################################
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
@@ -56,6 +58,7 @@ if control_mode == 'edge':
             time.sleep(100 / 1000)
             print(e)
 
+### Begin "Learned Mode" implementation
 elif control_mode == 'learned':
     to_arduino = serial.Serial(port='/dev/cu.usbserial-AB0P8TBC', baudrate=9600)
 
@@ -64,8 +67,9 @@ elif control_mode == 'learned':
 
     ed = EdgeDetection()
     cnn = CNN()
-
+    ### Uncomment the below line if new training data is available or model needs to be re-trained ###
     # cnn.load_training_data()
+    ##################################################################################################
     model = load_model('./drive_model.h5')
     try:
         while video.isOpened():
@@ -118,10 +122,11 @@ elif control_mode == "demo_edge":
                                             (255, 255, 255), 2, cv2.LINE_AA)
 
             cv2.imshow('Edge_Detection', process_with_rpms)
-
-            # path = '/Users/matt.scuteri/Desktop/GCU/CST-590/self-driving-dnn/training_data'
+            ### Uncomment the below 3 lines to record new training data ###
+            # path = '{{INSERT ABSOLUTE PATH HERE}}/self-driving-dnn/training_data'
             # cv2.imwrite(os.path.join(path, 'frame' + str(cap) + str(direction) + '.jpg'), frame)
             # cap += 1
+            ###############################################################
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
@@ -134,7 +139,9 @@ elif control_mode == "demo_learn":
     ed = EdgeDetection()
     cnn = CNN()
 
+    ### Uncomment the below line if new training data is available or model needs to be re-trained ###
     # cnn.load_training_data()
+    ##################################################################################################
     model = load_model('./drive_model.h5')
     try:
         while video.isOpened():
