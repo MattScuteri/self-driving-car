@@ -19,7 +19,7 @@ class CNN(object):
         self.data_location = os.path.dirname(sys.path[0]) + "/self-driving-dnn/training_data"
         self.img_data = []
         self.direction = []
-
+    # Retrieve training data from directory and prepare for training
     def load_training_data(self):
         for img in os.listdir(self.data_location):
             img_split = img.split('.')
@@ -47,7 +47,7 @@ class CNN(object):
 
         x_train, x_valid, y_train, y_valid = model_selection.train_test_split(img_data_arr, direction_data_arr,
                                                                               random_state=7)
-
+        # Create CNN model layers user Tensorflow framework
         model = Sequential(name="steering-model")
 
         model.add(Conv2D(24, (5, 5), activation="elu", strides=(2, 2), input_shape=(66, 200, 3)))
@@ -69,14 +69,14 @@ class CNN(object):
         print('saving model...')
         model.save('drive_model.h5')
 
-
+# compile and train the model
 def train_model(model, img_train, img_valid, direction_train, direction_valid):
     check = ModelCheckpoint('./checkpoints')
     model.compile(loss='mean_squared_error', optimizer=Adam(learning_rate=0.001))
     model.fit(img_train, direction_train, epochs=10, callbacks=[check], validation_data=(img_valid, direction_valid),
               shuffle=1, validation_steps=200)
 
-
+# manipulate image data to give more instances of training data for the model to use
 def img_augment(img):
     kernel = random.randint(1, 5)
 
