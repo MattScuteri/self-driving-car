@@ -67,20 +67,19 @@ Once enough training data is acquired, run the command:
 This will use the previously acquired training data to build the CNN model. After training, the prototype will begin to run using the trained model. Press `q` to terminate the program. After the model is trained, line 68 in `neural_network.py` can be commented out to skip the training step.
 
 ### Running without an Arduino prototype
+#### For convenience, a pre-trained model with a sampling of demo data has been included in this repository. The user does not need to collect training data or train the model in order to run the program.
 If the user does not have an Arduino prototype and merely wishes to run the code with sample data, the same process can be used as above, except instead of the first command, the following command should be run:
 
 `python3 drive_controller.py demo_edge`
 
-This command read frames from the video file `demo-video.mp4` and run the same algorithms over the video.
+This command read frames from the video file `./project_images/demo-video.mov` and run the same algorithms over the video.
 
 To train the neural network using the sample video, run the above command several more times, and then run:
 
 `python3 drive_controller.py demo_learn`
 
-This will train the neural network using the previously acquired training data and begin to run the program. As in the above instance, line 133 can be commented out in `drive_controller.py` to skip the training step.
+This will train the neural network using the previously acquired training data and begin to run the program. As in the above instance, line 143 can be commented out in `drive_controller.py` to skip the training step.
 
-
-**NOTE:** The edge detection algorithms were written to be optimized on a prototype where the external camera is centered on the track and pointing down towards the road. The sample video does not use the same configuration, so inconsistent results are likely to occur, but the direction commands will still work as expected.
 
 Sample Video: 
 [Zion Nationalpark - Scenic Drive, Utah - Full Ride - Onboard Front View](https://www.youtube.com/watch?v=rXKt0qhFN-Y)
