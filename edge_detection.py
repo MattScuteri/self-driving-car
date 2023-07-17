@@ -14,12 +14,16 @@ class EdgeDetection():
     def get_direction(self, frame):
         left = []
         right = []
+
+        # Error check needed for when no lane lines are present
         if EdgeDetection.lane_lines is not None:
             left = EdgeDetection.lane_lines[0][0]
             right = EdgeDetection.lane_lines[1][0]
 
+        # Finding the center of the frame for "center line steering"
         center = int(frame.shape[1]) / 2
 
+        # Checking the position of the Hough Transformation lines - returning direction code
         if len(left) > 0 and left[2] > center and left[2] != 6479999:
             return 3
         elif len(right) > 0 and right[2] < center:
@@ -52,6 +56,7 @@ class EdgeDetection():
         return steering_with_lane_detection
 
     @staticmethod
+    # preparing AI training data
     def ai_process_video(self, frame):
         height = frame.shape[0]
         img = frame[int(height / 2):, :, :]
@@ -63,6 +68,7 @@ class EdgeDetection():
 
         return img
 
+# Adjusting image for Canny Edge Detection Algorithm
 def image_alteration(i):
     gray = cv2.cvtColor(i, cv2.COLOR_BGR2GRAY)
     gaus_blur = cv2.GaussianBlur(gray, (5, 5), 0)
@@ -70,7 +76,7 @@ def image_alteration(i):
 
     return canny
 
-
+# Adjusting contrast for better lane detection
 def adjust_contrast(i):
     brightness = 50
     contrast = 250
@@ -81,7 +87,7 @@ def adjust_contrast(i):
 
     return clipped
 
-
+# Defining a region for best edge detection success - a different region is defined for the demo video
 def region(i, is_demo):
     h = i.shape[0]
     w = i.shape[1]
@@ -96,7 +102,7 @@ def region(i, is_demo):
 
     return masked
 
-
+# Drawing Hough Transformation lines on the screen for debugging and visualization purposes
 def drawing_lines(i, l):
     line_img = np.zeros_like(i)
 
@@ -106,7 +112,7 @@ def drawing_lines(i, l):
                 cv2.line(line_img, (int(x1), int(y1)), (int(x2), int(y2)), (255, 0, 0), 2)
     return line_img
 
-
+# Helper function to get best fit line coordinates of frame instance - error check needed for slope undefined instance
 def find_line_coordinates(i, l):
     try:
         slope, intercept = l
@@ -120,7 +126,7 @@ def find_line_coordinates(i, l):
 
     return [[x1, y1, x2, y2]]
 
-
+# Using Canny Edge Detection and Hough Transformation to determine best fit lines in frame
 def find_best_fit_lines(i, l):
     left = []
     right = []
@@ -146,7 +152,7 @@ def find_best_fit_lines(i, l):
 
     return averaged
 
-
+# Drawing steering line on the screen
 def draw_steering(i):
     steer_img = np.zeros_like(i)
     h = i.shape[0]
