@@ -53,18 +53,12 @@ An animated GIF compilation of a set of training data.
 The model will output a file called `drive_model.h5`, which, after the neural network has finished training, `drive_controller.py` will use to send appropriate steering commands to the Arduino.
 
 ## User Instructions
-### Running with an Arduino prototype
-In the root directory, run the command:
 
-`python3 drive_controller.py edge`
+In order to run this program properly, the user will need to have installed
 
-This will run the prototype using edge detection, while saving training data. To terminate the program, press `q`. Run this command several more times in order to acquire enough training data to adequately train the neural network.
-
-Once enough training data is acquired, run the command:
-
-`python3 drive_controller.py learned`
-
-This will use the previously acquired training data to build the CNN model. After training, the prototype will begin to run using the trained model. Press `q` to terminate the program. After the model is trained, line 71 in `neural_network.py` can be commented out to skip the training step.
+* Python 3.9
+* OpenCV
+* Tensorflow/Keras
 
 ### Running without an Arduino prototype
 #### For convenience, a pre-trained model with a sampling of demo data has been included in this repository. The user does not need to collect training data or train the model in order to run the program.
@@ -79,6 +73,19 @@ To train the neural network using the sample video, run the above command severa
 `python3 drive_controller.py demo_learn`
 
 This will train the neural network using the previously acquired training data and begin to run the program. As in the above instance, line 143 can be commented out in `drive_controller.py` to skip the training step.
+
+### Running with an Arduino prototype
+In the root directory, run the command:
+
+`python3 drive_controller.py edge`
+
+This will run the prototype using edge detection, while saving training data. To terminate the program, press `q`. Run this command several more times in order to acquire enough training data to adequately train the neural network.
+
+Once enough training data is acquired, run the command:
+
+`python3 drive_controller.py learned`
+
+This will use the previously acquired training data to build the CNN model. After training, the prototype will begin to run using the trained model. Press `q` to terminate the program. After the model is trained, line 71 in `neural_network.py` can be commented out to skip the training step.
 
 
 Sample Video: 
