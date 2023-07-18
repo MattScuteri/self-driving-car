@@ -93,7 +93,7 @@ def region(i, is_demo):
     w = i.shape[1]
     mask = np.zeros_like(i)
     if is_demo:
-        isolate_shape = np.array([[(0, 900), (900, 650), (1050, 650), (1750, 900)]], np.int32)
+        isolate_shape = np.array([[(150, 300), (275, 200), (350, 200), (525, 325)]], np.int32)
     else:
         isolate_shape = np.array([[(0, h / 2), (w, h / 2), (w, h), (0, h)]], np.int32)
 
