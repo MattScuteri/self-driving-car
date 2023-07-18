@@ -1,7 +1,7 @@
 # AI Powered Autonomous Vehicle
-This project was completed as part of the capstone project for the Grand Canyon University 
+This project was completed as part of the capstone for the Grand Canyon University 
 graduate program. The below documentation outlines the 
-structure and execution of the program with a test video 
+structure and execution of the program with a test video and fully trained AI model
 to demonstrate functionality. The original project was 
 completed with an Arduino based vehicle, the code for 
 which has been included in this repository.
@@ -19,7 +19,7 @@ which has been included in this repository.
 [Final Presentation Video Link](https://www.youtube.com/watch?v=N61lNMnK5ZU)
 
 ## Project Background
-The purpose of this project was to explore computer vision and artificial intelligence in the context of Internet of Things and embedded devices. Since the onset of self-driving cars and trucks replacing human driven ones is believed to be rapidly approaching, a computer vision and AI powered autonomous vehicle was selected to explore the capabilities of these devices, their advantages and shortfalls, as well as their feasibility to build on a smaller scale.
+The purpose of this project was to explore computer vision and artificial intelligence in the context of autonomous vehicles. Since the onset of self-driving cars and trucks replacing human driven ones is believed to be rapidly approaching, the construction of a computer vision and AI powered autonomous vehicle was decided upon to explore their capabilities, their advantages and shortfalls, as well as their feasibility to build on a smaller scale.
 
 ## Project Approach
 The software portion of the autonomous vehicle utilizes an object-oriented approach for both the edge detection portions and AI portions of the project. It depends on the user to input a command to determine which mode the program will run in.
@@ -30,7 +30,7 @@ The `drive_controller.py` serves as the main entry point for the autonomous vehi
 * `edge`: if the user has a working prototype with Arduino microcontroller, this command runs the prototype using computer vision based edge detecting algorithms.
 * `learned`: after running the `edge` command a number of times, the user should have amassed a good number of training images. Running this command will train the built-in neural network and run the prototype using the trained model.
 * `demo_edge`: this command runs the edge detection algorithms with a sample video. This is meant for users wishing to execute the code, but do not have a working prototype.
-* `demo_learn`: this command is meant to be run after the `demo_edge` command to train the built-in neural network using sample frames and directions from the sample video.
+* `demo_learn`: this command is meant to be run after the `demo_edge` command to train the built-in neural network using sample frames and directions from the sample video. For the purposes of the demo and for the convenience of the user, a trained model, `driver_model.h5`, has also been included in this repo, making the training of the neural network optional.
 
 ### Edge Detection
 The file `edge_detecion.py` houses the algorithms used to detect lanes on the road and determine which direction the vehicle should go. This file is only active using the `edge` and `demo-edge` commands. The edge detection portion of the project features a series of OpenCV functions that manipulates and crops the video to focus on a specific region of the screen. 
@@ -62,11 +62,11 @@ In order to run this program properly, the user will need to have installed
 
 ### Running without an Arduino prototype
 #### For convenience, a pre-trained model with a sampling of demo data has been included in this repository. The user does not need to collect training data or train the model in order to run the program.
-If the user does not have an Arduino prototype and merely wishes to run the code with sample data, the same process can be used as above, except instead of the first command, the following command should be run:
+If the user does not have an Arduino prototype and merely wishes to run the code with sample data, the below commands can be executed:
 
 `python3 drive_controller.py demo_edge`
 
-This command read frames from the video file `./project_images/demo-video.mov` and run the same algorithms over the video.
+This command reads frames from the video file `./project_images/demo-video.mov` and run the same algorithms over the video that are used with the prototype. To terminate the program before the video ends, press `q`.
 
 To train the neural network using the sample video, run the above command several more times, and then run:
 
