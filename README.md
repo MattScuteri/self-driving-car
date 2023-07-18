@@ -68,12 +68,17 @@ If the user does not have an Arduino prototype and merely wishes to run the code
 
 This command reads frames from the video file `./project_images/demo-video.mov` and run the same algorithms over the video that are used with the prototype. To terminate the program before the video ends, press `q`.
 
+![demo_edge_example](./project_images/demo_edge.gif)
+
 To train the neural network using the sample video, run the above command several more times, and then run:
 
 `python3 drive_controller.py demo_learn`
 
 This will train the neural network using the previously acquired training data and begin to run the program. As in the above instance, line 143 can be commented out in `drive_controller.py` to skip the training step.
 
+![demo_learn_example](./project_images/demo_learn.gif)
+
+**NOTE** The algorithms were written for higher quality images. The compression needed to store the demo video will result in some inconsistent results from the algorithms.
 ### Running with an Arduino prototype
 In the root directory, run the command:
 

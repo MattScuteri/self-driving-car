@@ -123,7 +123,7 @@ elif control_mode == "demo_edge":
 
             cv2.imshow('Edge_Detection', process_with_rpms)
             ### Uncomment the below 3 lines to record new training data ###
-            # path = '{{INSERT ABSOLUTE PATH HERE}}/self-driving-dnn/training_data'
+            # path = '{{INSERT_ABSOLUTE_PATH_HERE}}/self-driving-car/training_data'
             # cv2.imwrite(os.path.join(path, 'frame' + str(cap) + str(direction) + '.jpg'), frame)
             # cap += 1
             ###############################################################

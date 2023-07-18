@@ -16,7 +16,7 @@ from keras.callbacks import ModelCheckpoint
 
 class CNN(object):
     def __init__(self):
-        self.data_location = os.path.dirname(sys.path[0]) + "/self-driving-dnn/training_data"
+        self.data_location = os.path.dirname(sys.path[0]) + "/self-driving-car/training_data"
         self.img_data = []
         self.direction = []
     # Retrieve training data from directory and prepare for training
